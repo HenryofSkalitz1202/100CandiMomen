@@ -14,7 +14,7 @@ def write_candi(path, arr):
 
     for i in range(100):
         arr_sekrg = arr[i]
-        str_input = f'{arr_sekrg[0]};{arr_sekrg[1]};{arr_sekrg[2]}'
+        str_input = f'{arr_sekrg[0]};{arr_sekrg[1]};{arr_sekrg[2]};{arr_sekrg[3]};{arr_sekrg[4]}'
         f.write(str_input)
 
 
