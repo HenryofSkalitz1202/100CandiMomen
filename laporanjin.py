@@ -1,44 +1,60 @@
-import csv
-bahan = open("bahan_bangunan.csv", 'r')
-readerB = csv.reader(bahan, delimiter=',')
-candi = open("candi.csv", 'r')
-readerC = csv.reader(candi, delimiter=',')
-user = open("user.csv", 'r')
-readerU = csv.reader(user, delimiter=',')
+bahan = read_bahan("bahan_bangunan.csv")
+candi = read_candi("candi.csv")
+user = read_user("user.csv")
 
 def laporanjin() : 
     # total jin : ...
     totJin = 0 
-    rowU = next(readerU)
-    while not EOP(rowU) : 
-        if rowU[0] != "Bondowoso" or rowU[0] != "Roro":
+    for i in range(102) : 
+        if user[0][i] != "Bondowoso" or user[0][i] != "Roro" or user[0][i] != "": # cek username di idx ke-i apakah ada isi (selain roro dan bondowoso)
             totJin += 1
-    print("Total Jin: " + str(totJin)) # hitungan total jin
+    print("Total Jin: " + str(totJin)) # output total jin
 
     # total jin pengumpul : ...
     totJinkum = 0
-    rowU2 = next(readerU) 
-    while not EOP(rowU2) :
-        if rowU2[2] == "jin_pengumpul" :
-            totJinkum += 1
+    for i in range(102) : 
+        if user[2][i] == "jin_pengumpul" :
+            totJinkum += 1 
     print("Total Jin Pengumpul: " + str(totJinkum))
     
     # total jin pembangun : ...
-    totJinban = 0 
-    rowU3 = next(readerU)
-    while not EOP(rowU3) :
-        if rowU3[2] == "jin_pembangun" :
-            totJinban += 1
+    totJinban = 0
+    for i in range(102) : ##upd
+        if user[2][i] == "jin_pembangun" :
+            totJinban += 1 
     print("Total Jin Pembangun: " + str(totJinban))
     
     # nama jin terajin : ...
-    listCan = [["*"] for i in range(totJinban)]
-    
+    listCan = [[""] for i in range(totJinban)]
+    idx = 0
+    for i in range(100) : 
+        if candi[1][i] != "" :
+            listCan[idx] = candi[i]
+            idx += 1
+    uniqname = [[""] for i in range(idx)] ##wip : list of unique names ; number of unique occurrences
+    uniqocc = 0
+    for i in range(idx) : 
+        for j in range(i+1, idx) : 
+            if listCan[i] != ""  and:
+                if 
+    freqMat = [["", 0] for i in range(uniqocc)] ##wip : traversal freqMat[i][1] max and min
+    for i in range(totJinban) : 
+        
     
     # nama jin termalas : ...
-# jumlah pasir : ...
-# jumlah air : ...
-# jumlah batu : ...
-
+    
+    
+    # baca jumlah pasir, batu, dan air dari csv
+    for i in range(3) : 
+        tempMat[i] = bahan[i][2]
+    pasir = tempMat[0]
+    air = tempMat[2]
+    batu = tempMat[1]
+    # jumlah pasir : ...
+    print("Jumlah Pasir: " + str(pasir) + " unit")
+    # jumlah air : ...
+    print("Jumlah Air: " + str(air) + " unit")
+    # jumlah batu : ...
+    print("Jumlah Batu: " + str(batu) + " unit")
 # if jin pembangun = 0 then -> jin terajin & jin termalas : -
 # 
