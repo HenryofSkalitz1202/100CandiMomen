@@ -1,4 +1,3 @@
-import csv
 import RNG as rand
 bahan = read_bahan("bahan_bangunan.csv") ##upd
 candi = read_candi("candi.csv") ##upd
