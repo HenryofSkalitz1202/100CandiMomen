@@ -35,7 +35,7 @@ def read_bahan(path):
 def read_candi(path):
     global arr_candi
     f = open(path, 'r')
-    arr_candi = [[x, '', 0] for x in range(100)]
+    arr_candi = [[x, '', 0, 0, 0] for x in range(100)]
     f.readline()
 
     for i in range(100):
