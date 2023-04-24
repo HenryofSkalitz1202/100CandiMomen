@@ -9,6 +9,7 @@ def help_umum():
     print("2. exit")
     print("   Untuk keluar dari program dan kembali ke terminal")
 
+
 def help_bondowoso():
     print("=========== HELP ===========")
     print("1. Logout")
@@ -47,7 +48,7 @@ def help_pembangun():
     print("   Untuk membangun candi")
 
 
-def help(role):
+def list_help(role):
     if not ambil_status_login():
         help_umum()
     else:
