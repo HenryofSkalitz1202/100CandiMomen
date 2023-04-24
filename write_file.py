@@ -1,10 +1,13 @@
+from FungsiTambahan import remove_sesuatu
+
+
 def write_user(path, arr):
     f = open(path, 'w')
     f.write('username;password;role\n')
 
     for i in range(102):
         arr_sekrg = arr[i]
-        str_input = f'{arr_sekrg[0]};{arr_sekrg[1]};{arr_sekrg[2]}'
+        str_input = f'{arr_sekrg[0]};{arr_sekrg[1]};{arr_sekrg[2]}\n'
         f.write(str_input)
 
 
@@ -14,7 +17,8 @@ def write_candi(path, arr):
 
     for i in range(100):
         arr_sekrg = arr[i]
-        str_input = f'{arr_sekrg[0]};{arr_sekrg[1]};{arr_sekrg[2]};{arr_sekrg[3]};{arr_sekrg[4]}'
+        arr_sekrg[4] = remove_sesuatu(arr_sekrg[4], '\n')
+        str_input = f'{arr_sekrg[0]};{arr_sekrg[1]};{arr_sekrg[2]};{arr_sekrg[3]};{arr_sekrg[4]}\n'
         f.write(str_input)
 
 
@@ -24,5 +28,6 @@ def write_bahan(path, arr):
 
     for i in range(3):
         arr_sekrg = arr[i]
-        str_input = f'{arr_sekrg[0]};{arr_sekrg[1]};{arr_sekrg[2]}'
+        arr_sekrg[2] = remove_sesuatu(arr_sekrg[2], '\n')
+        str_input = f'{arr_sekrg[0]};{arr_sekrg[1]};{arr_sekrg[2]}\n'
         f.write(str_input)
