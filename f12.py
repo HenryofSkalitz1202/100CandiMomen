@@ -7,7 +7,7 @@ def ayam_berkokok():
         next(reader) 
         jumlah_candi = sum(1 for row in reader)
     
-    print(f"Jumlah Candi: {jumlah_candi}\n")
+    print("Jumlah Candi:", jumlah_candi)
     
     if jumlah_candi >= 100:
         print("Yah, Bandung Bondowoso memenangkan permainan!")
