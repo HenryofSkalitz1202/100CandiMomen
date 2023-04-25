@@ -6,21 +6,21 @@ def laporanjin() :
     # total jin : ...
     totJin = 0 
     for i in range(102) : 
-        if user[0][i] != "Bondowoso" or user[0][i] != "Roro" or user[0][i] != "": # cek username di idx ke-i apakah ada isi (selain roro dan bondowoso)
+        if user[i][0] != "Bondowoso" or user[i][0] != "Roro" or user[i][0] != "": # cek username di idx ke-i apakah ada isi (selain roro dan bondowoso)
             totJin += 1
     print("Total Jin: " + str(totJin)) # output total jin
 
     # total jin pengumpul : ...
     totJinkum = 0
     for i in range(102) : 
-        if user[2][i] == "jin_pengumpul" :
+        if user[i][2] == "jin_pengumpul" :
             totJinkum += 1 
     print("Total Jin Pengumpul: " + str(totJinkum))
     
     # total jin pembangun : ...
     totJinban = 0
     for i in range(102) : ##upd
-        if user[2][i] == "jin_pembangun" :
+        if user[i][2] == "jin_pembangun" :
             totJinban += 1 
     print("Total Jin Pembangun: " + str(totJinban))
     
@@ -28,8 +28,8 @@ def laporanjin() :
     listCan = [[""] for i in range(totJinban)]
     idx = 0
     for i in range(100) : 
-        if candi[1][i] != "" :
-            listCan[idx] = candi[i]
+        if candi[i][1] != "" :
+            listCan[idx] = candi[i][1]
             idx += 1
     uniqname = [[""] for i in range(idx)] ##wip : list of unique names ; number of unique occurrences
     uniqocc = 0
