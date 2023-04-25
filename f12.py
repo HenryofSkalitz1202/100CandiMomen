@@ -43,7 +43,3 @@ def hancurkan_candi():
             print('Candi tidak jadi dihancurkan')
     else:
         print('Tidak ada candi dengan ID tersebut.')
-    
-    with open('candi.csv', 'w', newline='') as file:
-        writer = csv.writer(file, delimiter=';')
-        writer.writerows(candi_list)
