@@ -1,115 +1,81 @@
-import RNG as rand
-bahan = read_bahan("bahan_bangunan.csv") ##upd
-candi = read_candi("candi.csv") ##upd
-user = read_user("user.csv") ##upd
+from FungsiTambahan import linearCongruentialMethod
+from datetime import datetime
 
-def kumpul(x) : # for kumpul biasa dan batch kumpul
-    totJinkum = 0
-    for i in range(102) : ##upd
-        if user[i][2] == "jin_pengumpul" :
-            totJinkum += 1 
-    tempMat = [0,0,0] # utk nyimpen data pasir,batu,air sementara 
-    for i in range(3) : 
-        tempMat[i] = bahan[i][2] ##upd
-    pasir_dari_csv = int(tempMat[0])
-    batu_dari_csv = int(tempMat[1])
-    air_dari_csv = int(tempMat[2])
-    
-    if x == "indiv" : # jin pengumpul indiv (kumpul biasa)
-        pasir = rand() # note : function rand belum dikasih parameter
-        batu = rand()
-        air = rand()
-        print(f"Jin menemukan {pasir} pasir, {batu} batu, dan {air} air.")
-        # isi file dalam csv bahan
-        totMat = [["pasir", "p", str(pasir+pasir_dari_csv)], ["batu", "b",str(batu+batu_dari_csv)], ["air", "a", str(air+air_dari_csv)]]
-        write_bahan(bahan_bangunan, totMat) ##upd
-    else : # batch kumpul
-        n = totJinkum # jumlah jin pengumpul
-        if n > 0 : # ada jin pengumpul
-            pasir = [0 for i in range(n)]
-            batu = [0 for i in range(n)]
-            air = [0 for i in range(n)]
-            mat = [pasir,batu,air]
-            for i in range(3) : 
-                for j in range(n) :
-                    mat[i][j] = rand() # note : function random belum dikasih parameter
-            sumpas = 0 # sum pasir; sum batu; sum air
-            sumbat = 0 
-            sumair = 0
-            for i in range(n) :
-                sumpas += mat[0][j]
-                sumbat += mat[1][j]
-                sumair += mat[2][j]
-            print(f"Mengerahkan {n} jin untuk mengumpulkan bahan.")
-            print(f"Jin menemukan total {sumpas} pasir, {sumbat} batu, dan {sumair} air.")
-            # isi dalam file csv bahan
-            totMat = [["pasir", "p", str(sumpas+pasir_dari_csv)], ["batu", "b",str(sumbat+batu_dari_csv)], ["air", "a", str(sumair+air_dari_csv)]]
-            write_bahan(bahan_bangunan, totMat) ##upd
-        else : # tidak ada jin pengumpul
-            print("Kumpul gagal. Anda tidak punya jin pengumpul. Silahkan summon terlebih dahulu.")
 
-def bangun() : 
-    totJinban = 0
-    for i in range(102) : ##upd
-        if user[i][2] == "jin_pembangun" :
-            totJinban += 1 
-    # list nama jin
-    names = ["*" for i in range(totJinban)]
-    for i in range(102) : 
-        idx = 0
-        if user[i][2] == "jin_pembangun" :
-            names[idx] = user[i][0]
-            idx += 1
-    
-    n = totJinban # jumlah jin pembangun
-    if n > 0 : # jika ada jin pembangun
-        pasir = [0 for i in range(n)]
-        batu = [0 for i in range(n)]
-        air = [0 for i in range(n)]
-        mat = [pasir,batu,air]
-        for i in range(3) : 
-            for j in range(n) : # matrix utk data pasir, batu, air yang dibutuhkan
-                mat[i][j] = rand()
-        sumpas = 0
-        sumbat = 0 
-        sumair = 0
-        for i in range(n) :
-            sumpas += mat[0][j]
-            sumbat += mat[1][j]
-            sumair += mat[2][j]
-        tempMat = [0,0,0] # utk nyimpen data pasir,batu,air sementara 
-        for i in range(3) : 
-            tempMat[i] = bahan[i][2] ##upd
-        pasir_dari_csv = int(tempMat[0])
-        batu_dari_csv = int(tempMat[1])
-        air_dari_csv = int(tempMat[2])
-        # check kesesuaian jumlah material dari csv file 
-        if sumpas <= pasir_dari_csv and sumbat <= batu_dari_csv and sumair <= air_dari_csv :
-            print(f"Mengerahkan {n} jin untuk membangun candi dengan total bahan {sumpas} pasir, {sumbat} batu, dan {sumair} air")
-            print(f"Jin berhasil membangun total {n} candi")
-            # kurangi material di csv bahan
-            totMat = [["pasir", "p", str(pasir_dari_csv-sumpas)], ["batu", "b",str(batu_dari_csv-sumbat)], ["air", "a", str(air_dari_csv-sumair)]]
-            write_bahan(bahan_bangunan, totMat) ##upd
-            for i in range(n) : 
-                matcan = [str(i+1), names[i], mat[0][i], mat[1][i], mat[2][i]] # id ;nama ;pasir ;batu ;air
-            write_candi("candi.csv", matcan) ##upd
-            # write candi + bahan yg digunakan yang udah dibangun di csv candi
-        else : # jumlah material di csv tidak mencukupi
-            print("Bangun gagal. Kurang ", end="")
-            if sumpas > pasir_dari_csv and sumbat <= batu_dari_csv and sumair <= air_dari_csv : # cuma pasir yang kurang
-                print(f"{sumpas-pasir_dari_csv} pasir.")
-            elif sumbat > batu_dari_csv and sumpas <= pasir_dari_csv and sumair <= air_dari_csv : # cuma batu yang kurang
-                print(f"{sumbat-batu_dari_csv} batu.")
-            elif sumair > air_dari_csv and sumpas <= pasir_dari_csv and sumbat <= batu_dari_csv : # cuma air yang kurang
-                print(f"{sumair-air_dari_csv} air.")
-            elif sumpas > pasir_dari_csv and sumbat > batu_dari_csv and sumair <= air_dari_csv :  # pasir dan batu kurang
-                print(f"{sumpas-pasir_dari_csv} pasir, dan {sumbat-batu_dari_csv} batu.")
-            elif sumpas > pasir_dari_csv and sumair > air_dari_csv and sumbat <= batu_dari_csv : # pasir dan air kurang
-                print(f"{sumpas-pasir_dari_csv} pasir, dan {sumair-air_dari_csv} air.")
-            elif sumbat > batu_dari_csv and sumair > air_dari_csv and sumpas <= pasir_dari_csv : # batu dan air kurang
-                print(f"{sumbat-batu_dari_csv} batu, dan {sumair-air_dari_csv} air.")
-            else : # semua bahan kurang
-                print(f"{sumpas-pasir_dari_csv} pasir, {sumbat-batu_dari_csv} batu, dan {sumair-air_dari_csv} air.")
-    else : # tidak ada jin pembangun
-        print("Bangun gagal. Anda tidak punya jin pembangun. Silahkan summon terlebih dahulu.")
-            
+def bangun(arr_candi, arr_bahan, builder):
+    list_random = [f'el-{x}' for x in range(7)]
+    list_random_filtered = [f'el-{x}' for x in range(5)]
+    id_candi = None
+
+    if arr_candi[0][2] == '0':
+        jmlh_candi = 0
+    else:
+        jmlh_candi = 1
+
+    for i in range(1, 100):
+        if arr_candi[i][2] != '0':
+            jmlh_candi += 1
+
+    for x in range(100):
+        if arr_candi[x][2] == '0':
+            id_candi = int(arr_candi[x][0])
+            break
+
+    linearCongruentialMethod(id_candi, 7, 3, 2, list_random, 7)
+
+    idx = 0
+    if id_candi <= 5:
+        for x in range(5):
+            list_random_filtered[x] = list_random[x]
+    else:
+        for x in range(7):
+            if (int(list_random[x]) > 0) and (int(list_random[x]) <= 5):
+                list_random_filtered[idx] = list_random[x]
+                idx += 1
+
+            if idx == 5:
+                break
+
+    pasir = list_random_filtered[0]
+    batu = list_random_filtered[2]
+    air = list_random_filtered[4]
+
+    if int(pasir) <= int(arr_bahan[0][2]):
+        if int(batu) <= int(arr_bahan[1][2]):
+            if int(air) <= int(arr_bahan[2][2]):
+                arr_bahan[0][2] = int(arr_bahan[0][2]) - int(pasir)
+                arr_bahan[1][2] = int(arr_bahan[1][2]) - int(batu)
+                arr_bahan[2][2] = int(arr_bahan[2][2]) - int(air)
+
+                arr_candi[id_candi] = [f'{id_candi}', f'{builder}', f'{pasir}', f'{batu}', f'{air}']
+
+                print("Candi berhasil dibangun")
+
+                if jmlh_candi >= 100:
+                    sisa_candi = 0
+                else:
+                    sisa_candi = 100 - jmlh_candi
+                print(f"Sisa candi yang perlu dibangun: {sisa_candi}.")
+
+    return arr_candi, arr_bahan
+
+
+def kumpul(arr_bahan):
+    list1 = [f'e-{x}'for x in range(6)]
+    list2 = [f'e-{x}' for x in range(6)]
+    list3 = [f'e-{x}' for x in range(6)]
+    linearCongruentialMethod(3, 7, 3, 2, list1, 6)
+    linearCongruentialMethod(2, 7, 3, 2, list2, 6)
+    linearCongruentialMethod(5, 7, 3, 2, list3, 6)
+
+    now = datetime.now()
+    pasir_random = list1[now.second % 6]
+    batu_random = list2[now.second % 6]
+    air_random = list3[now.second % 6]
+
+    arr_bahan[0][2] = int(arr_bahan[0][2]) + int(pasir_random)
+    arr_bahan[1][2] = int(arr_bahan[1][2]) + int(batu_random)
+    arr_bahan[2][2] = int(arr_bahan[2][2]) + int(air_random)
+
+    print(f'Jin menemukan {pasir_random} pasir, {batu_random} batu, dan {air_random} air.\n')
+    return arr_bahan
