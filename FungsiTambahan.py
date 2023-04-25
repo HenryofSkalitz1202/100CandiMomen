@@ -1,34 +1,15 @@
-def jml_rows(): #Menghitung jumlah baris pada CSV
-    with open ('dummy.csv','r') as f:
-        num_rows = 0
-        lines = f.readlines()
-        for line in lines:
-            num_rows += 1
-    return num_rows
-
-def my_split(string, delimiter): #Pengganti fungsi split()
+def my_split(string, delimiter):  # Pengganti fungsi split()
     substrings = []
     current_substring = ''
     for i in range(len(string)-1):
         if string[i] == delimiter:
             substrings += [current_substring]
             current_substring = ''
-        elif string[i]+string[i+1]!='\n':
+        elif string[i]+string[i+1] != '\n':
             current_substring += string[i]
     substrings += [current_substring]
     return substrings
 
-def matrix_csv(): # Mengubah file CSV menjadi matrix
-    with open('dummy.csv','r') as f:
-        num_rows=0
-        lines = f.readlines()
-        for line in lines:
-            num_rows += 1
-        matrixx = ['' for i in range(num_rows)]
-        for i in range(num_rows):
-            line=my_split(lines[i],';')
-            matrixx[i]=line
-    return matrixx
 
 def remove_sesuatu(string, elem):
     hasil = ''
@@ -37,3 +18,40 @@ def remove_sesuatu(string, elem):
             hasil += string[i]
     return hasil
 
+
+def sort_array_candi(arr):
+    for i in range(99):
+        for j in range(0, 99-i):
+            if arr[j][1] == larger_string(arr[j][1], arr[j+1][1]):
+                temp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = temp
+    return arr
+
+
+def larger_string(str1, str2):
+    if len(str1) <= len(str2):
+        smaller_len = len(str1)
+        largerstring = str2
+    else:
+        smaller_len = len(str2)
+        largerstring = str1
+
+    for i in range(smaller_len):
+        if str1[i].upper() > str2[i].upper():
+            largerstring = str1
+            break
+        elif str2[i].upper() > str1[i].upper():
+            largerstring = str2
+            break
+    return largerstring
+
+
+def linearCongruentialMethod(Xo, m, a, c, randomNums, noOfRandomNums):
+    # Initialize the seed state
+    randomNums[0] = Xo
+    # Traverse to generate required
+    # numbers of random numbers
+    for i in range(1, noOfRandomNums):
+        # Follow the linear congruential method
+        randomNums[i] = ((randomNums[i - 1] * a) + c) % m
