@@ -6,7 +6,7 @@ user = read_user("user.csv") ##upd
 def kumpul(x) : # for kumpul biasa dan batch kumpul
     totJinkum = 0
     for i in range(102) : ##upd
-        if user[2][i] == "jin_pengumpul" :
+        if user[i][2] == "jin_pengumpul" :
             totJinkum += 1 
     tempMat = [0,0,0] # utk nyimpen data pasir,batu,air sementara 
     for i in range(3) : 
@@ -51,14 +51,14 @@ def kumpul(x) : # for kumpul biasa dan batch kumpul
 def bangun() : 
     totJinban = 0
     for i in range(102) : ##upd
-        if user[2][i] == "jin_pembangun" :
+        if user[i][2] == "jin_pembangun" :
             totJinban += 1 
     # list nama jin
     names = ["*" for i in range(totJinban)]
     for i in range(102) : 
         idx = 0
-        if user[2][i] == "jin_pembangun" :
-            names[idx] = user[0][i]
+        if user[i][2] == "jin_pembangun" :
+            names[idx] = user[i][0]
             idx += 1
     
     n = totJinban # jumlah jin pembangun
