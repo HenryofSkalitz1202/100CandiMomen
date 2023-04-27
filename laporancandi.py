@@ -5,7 +5,7 @@ def laporcandi() :
     # total candi : ...
     totalcan = 0
     for i in range(100) : 
-        if candi[1] != "" : # if candinya ada pembuat (ada candi)
+        if candi[i][1] != "" : # if candinya ada pembuat (ada candi)
         totalcan += 1 
     print("Total Candi: " + str(totalcan)) 
     
