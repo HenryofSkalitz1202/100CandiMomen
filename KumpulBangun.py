@@ -7,6 +7,9 @@ def bangun(arr_candi, arr_bahan, builder):
     list_random_filtered = [f'el-{x}' for x in range(5)]
     id_candi = None
 
+    for x in range(100):
+        arr_candi[x][0] = f'{x}'
+
     if arr_candi[0][2] == '0':
         jmlh_candi = 0
     else:
@@ -57,6 +60,15 @@ def bangun(arr_candi, arr_bahan, builder):
                     sisa_candi = 100 - jmlh_candi
                 print(f"Sisa candi yang perlu dibangun: {sisa_candi}.")
 
+            else:
+                print("Bahan bangunan tidak mencukupi.")
+                print("Candi tidak bisa dibangun!")
+        else:
+            print("Bahan bangunan tidak mencukupi.")
+            print("Candi tidak bisa dibangun!")
+    else:
+        print("Bahan bangunan tidak mencukupi.")
+        print("Candi tidak bisa dibangun!")
     return arr_candi, arr_bahan
 
 
