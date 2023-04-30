@@ -108,17 +108,17 @@ def ubahjin(arr):
             elif arr[i][2] == 'jin_pembangun':
                 pembangun = input('Jin ini bertipe “Pembangun”. Yakin ingin mengubah ke tipe “Pengumpul” (Y/N)? ')
                 if pembangun.upper() == 'N':
-                    print('Jin tidak jadi diubah.')
+                    print('Jin tidak jadi diubah.\n')
                     break
                 elif pembangun.upper() == 'Y':
                     arr[i][2] = 'jin_pengumpul'
-                    print('Jin telah berhasil diubah.')
+                    print('Jin telah berhasil diubah.\n')
             break
 
         else:
             temp += 1
             if temp == 100:
-                print('Tidak ada jin dengan username tersebut.')
+                print('Tidak ada jin dengan username tersebut.\n')
     return arr
 
 
