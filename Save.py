@@ -7,6 +7,13 @@ from WriteFile import write_candi
 
 def save(arr_user, arr_candi, arr_bahan):
     nama_folder = input("Masukkan nama folder: ")
+    isSaveExist = os.path.isdir('./save/')
+
+    if not isSaveExist:
+        print(f"Membuat folder save...")
+        os.mkdir('./save/')
+        time.sleep(2)
+
     path = './save/' + nama_folder
     isExist = os.path.isdir(path)
 
