@@ -1,13 +1,20 @@
 def my_split(string, delimiter):  # Pengganti fungsi split()
-    substrings = []
+    len_substrings = 1
+    for i in range(len(string)):
+        if string[i] == delimiter:
+            len_substrings += 1
+
+    substrings = ['' for x in range(len_substrings)]
     current_substring = ''
+    idx = 0
     for i in range(len(string)-1):
         if string[i] == delimiter:
-            substrings += [current_substring]
+            substrings[idx] = current_substring
             current_substring = ''
+            idx += 1
         elif string[i]+string[i+1] != '\n':
             current_substring += string[i]
-    substrings += [current_substring]
+    substrings[len_substrings-1] = current_substring
     return substrings
 
 
@@ -50,8 +57,7 @@ def larger_string(str1, str2):
 def linearCongruentialMethod(Xo, m, a, c, randomNums, noOfRandomNums):
     # Initialize the seed state
     randomNums[0] = Xo
-    # Traverse to generate required
-    # numbers of random numbers
+    # Traverse to generate required numbers of random numbers
     for i in range(1, noOfRandomNums):
         # Follow the linear congruential method
         randomNums[i] = ((randomNums[i - 1] * a) + c) % m
