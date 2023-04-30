@@ -85,6 +85,10 @@ def hapusjin(user, candis):
             temp += 1
     if temp == 100:
         print('Tidak ada jin dengan username tersebut\n')
+
+    for x in range(100):
+        candis[x][0] = f'{x}'
+
     return user, candis
 
 
@@ -172,24 +176,21 @@ def batch_bangun(arr_jin, arr_bahan, arr_candi):
                 id_candi = int(arr_of_candi[x][0])
                 break
 
-        linearCongruentialMethod(id_candi, 7, 3, 2, list_random, 7)
+        key = id_candi % 6
+        linearCongruentialMethod(key, 7, 3, 2, list_random, 7)
 
         index = 0
-        if id_candi <= 5:
-            for x in range(5):
-                list_random_filtered[x] = list_random[x]
-        else:
-            for x in range(7):
-                if (int(list_random[x]) > 0) and (int(list_random[x]) <= 5):
-                    list_random_filtered[index] = list_random[x]
-                    index += 1
+        for x in range(7):
+            if (int(list_random[x]) > 0) and (int(list_random[x]) <= 5):
+                list_random_filtered[index] = list_random[x]
+                index += 1
 
-                if index == 5:
-                    break
+            if index == 5:
+                break
 
-        pasir = list_random_filtered[0]
-        batu = list_random_filtered[2]
-        air = list_random_filtered[4]
+        pasir = list_random_filtered[id_candi % 1]
+        batu = list_random_filtered[id_candi % 2]
+        air = list_random_filtered[id_candi % 3]
 
         arr_of_candi[id_candi] = [f'{id_candi}', f'{builder}', f'{pasir}', f'{batu}', f'{air}']
 
@@ -229,7 +230,7 @@ def batch_bangun(arr_jin, arr_bahan, arr_candi):
             arr_id[i] = str(temp[4])
 
         print(f"Mengerahkan {total_jin_pembangun} jin untuk membangun candi dengan total bahan {total_pasir} pasir,"
-              f"{total_batu} batu, dan {total_air} air.")
+              f" {total_batu} batu, dan {total_air} air.")
 
         kurang_pasir = 0
         kurang_batu = 0
