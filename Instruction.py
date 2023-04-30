@@ -28,9 +28,6 @@ def instruction_umum():
     elif ins == "save":
         save(users, candi, bahan_bangunan)
         instruction(ambil_role())
-    elif ins == "exit":
-        exit_func(users, candi, bahan_bangunan)
-        quit()
     elif ins == "logout":
         logout()
         instruction(ambil_role())
