@@ -11,43 +11,43 @@ def summonjin(arr):
                 return False
         return True
 
-    print('''\nJenis jin yang dapat dipanggil:
-    (1) Pengumpul - Bertugas mengumpulkan bahan bangunan
-    (2) Pembangun - Bertugas membangun candi''')
-    e = ''
-
-    b = int(input('Masukkan nomor jenis jin yang ingin dipanggil : '))
-    while b != 1 and b != 2:
-        print(f'Tidak ada jenis jin bernomor "{b}"!\n')
-        b = int(input('\nMasukkan nomor jenis jin yang ingin dipanggil : '))
+    if arr[101][0] != '101':
+        print('Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu\n')
     else:
-        if b == 1:
-            print('Memilih jin "Pengumpul".\n')
-            e = 'jin_pengumpul'
-        elif b == 2:
-            print('Memilih jin "Pembangun".\n')
-            e = 'jin_pembangun'
-        c = input('Masukkan username jin : ')
+        print('''\nJenis jin yang dapat dipanggil:
+        (1) Pengumpul - Bertugas mengumpulkan bahan bangunan
+        (2) Pembangun - Bertugas membangun candi''')
+        e = ''
 
-        while not validasi_nama_jin(arr, c):
-            c = input('\nMasukkan username jin : ')
-
-        d = input('Masukkan password jin : ')
-
-        while len(d) < 5 or len(d) > 15:
-            print('Password panjangnya harus 5-25 karakter!')
-            d = input('\nMasukkan password jin : ')
-
-        print('\nMengumpulkan sesajen...')
-        time.sleep(1)
-        print('Menyerahkan sesajen...')
-        time.sleep(1)
-        print('Membacakan mantra...')
-        time.sleep(1)
-
-        if arr[101][0] != '101':
-            print('Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu\n')
+        b = int(input('Masukkan nomor jenis jin yang ingin dipanggil : '))
+        while b != 1 and b != 2:
+            print(f'Tidak ada jenis jin bernomor "{b}"!\n')
+            b = int(input('Masukkan nomor jenis jin yang ingin dipanggil : '))
         else:
+            if b == 1:
+                print('Memilih jin "Pengumpul".\n')
+                e = 'jin_pengumpul'
+            elif b == 2:
+                print('Memilih jin "Pembangun".\n')
+                e = 'jin_pembangun'
+            c = input('Masukkan username jin : ')
+
+            while not validasi_nama_jin(arr, c):
+                c = input('\nMasukkan username jin : ')
+
+            d = input('Masukkan password jin : ')
+
+            while len(d) < 5 or len(d) > 15:
+                print('Password panjangnya harus 5-25 karakter!')
+                d = input('\nMasukkan password jin : ')
+
+            print('\nMengumpulkan sesajen...')
+            time.sleep(1)
+            print('Menyerahkan sesajen...')
+            time.sleep(1)
+            print('Membacakan mantra...')
+            time.sleep(1)
+
             for i in range(2, 102):
                 if arr[i][0] == f'{i}':
                     arr[i][0] = c
