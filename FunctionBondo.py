@@ -83,6 +83,7 @@ def hapusjin(user, candis):
                 break
         else:
             temp += 1
+
     if temp == 100:
         print('Tidak ada jin dengan username tersebut\n')
 
@@ -203,7 +204,8 @@ def batch_bangun(arr_jin, arr_bahan, arr_candi):
             total_jin_pembangun += 1
 
     if total_jin_pembangun == 0:
-        print("Kumpul gagal. Anda tidak punya jin pembangun. Silahkan summon terlebih dahulu.")
+        print("Bangun gagal. Anda tidak punya jin pembangun. Silahkan summon terlebih dahulu.")
+        return arr_candi, arr_bahan
     else:
         arr_pembangun = [f'builder-{x}' for x in range(total_jin_pembangun)]
         idx = 0
@@ -231,6 +233,7 @@ def batch_bangun(arr_jin, arr_bahan, arr_candi):
 
         print(f"Mengerahkan {total_jin_pembangun} jin untuk membangun candi dengan total bahan {total_pasir} pasir,"
               f" {total_batu} batu, dan {total_air} air.")
+        time.sleep(2)
 
         kurang_pasir = 0
         kurang_batu = 0
