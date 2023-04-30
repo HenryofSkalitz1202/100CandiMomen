@@ -24,19 +24,16 @@ def bangun(arr_candi, arr_bahan, builder):
             id_candi = int(arr_candi[x][0])
             break
 
-    linearCongruentialMethod(id_candi, 7, 3, 2, list_random, 7)
+    key = id_candi % 6
+        linearCongruentialMethod(key, 7, 3, 2, list_random, 7)
 
-    idx = 0
-    if id_candi <= 5:
-        for x in range(5):
-            list_random_filtered[x] = list_random[x]
-    else:
+        index = 0
         for x in range(7):
             if (int(list_random[x]) > 0) and (int(list_random[x]) <= 5):
-                list_random_filtered[idx] = list_random[x]
-                idx += 1
+                list_random_filtered[index] = list_random[x]
+                index += 1
 
-            if idx == 5:
+            if index == 5:
                 break
 
     pasir = list_random_filtered[0]
